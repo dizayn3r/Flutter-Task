@@ -8,10 +8,12 @@ import '../models/user.dart';
 class UserProvider with ChangeNotifier {
   /// Process Indicator
   bool _loading = false;
+
   bool get loading => _loading;
 
   /// User List
   List<User> _users = [];
+
   List<User> get users => _users;
 
   setLoading(bool value) {
@@ -34,6 +36,49 @@ class UserProvider with ChangeNotifier {
       modifiedList.add(user);
     }
     setUsers(modifiedList);
+    setLoading(false);
+  }
+
+  /// Create User
+  Future<bool> createUser({required User user}) async {
+    http.Response response = await http.post(
+      Uri.parse("https://jsonplaceholder.typicode.com/users"),
+      body: jsonEncode(user.toJson()),
+    );
+    if (response.statusCode == 201) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// Update User
+  Future<bool> updateUser({required User user}) async {
+    http.Response response = await http.patch(
+      Uri.parse("https://jsonplaceholder.typicode.com/users"),
+      body: jsonEncode(user.toJson()),
+    );
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// Delete Users
+  Future<bool> deleteUser(int userId) async {
+    http.Response response = await http.delete(Uri.parse("https://jsonplaceholder.typicode.com/users/$userId"));
+    if (response.statusCode == 200) {
+      _removeUser(userId);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  _removeUser(int userId) {
+    setLoading(true);
+    _users.removeWhere((element) => element.id == userId);
     setLoading(false);
   }
 }

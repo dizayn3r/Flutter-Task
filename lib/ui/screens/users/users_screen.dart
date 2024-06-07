@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_task/providers/user_provider.dart';
+import 'package:flutter_interview_task/ui/widgets/users/user_form.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/user.dart';
@@ -59,7 +60,18 @@ class _UsersScreenState extends State<UsersScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => Dialog(
+              surfaceTintColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0),
+              ),
+              child: const UserForm(title: "Add User"),
+            ),
+          );
+        },
         child: const Icon(Icons.add_rounded),
       ),
     );

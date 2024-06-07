@@ -23,9 +23,26 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Tasks',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
           useMaterial3: true,
           appBarTheme: const AppBarTheme(centerTitle: true),
+          inputDecorationTheme: InputDecorationTheme(
+            focusColor: Colors.teal,
+            alignLabelWithHint: true,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+          ),
         ),
         home: const HomeScreen(),
       ),
