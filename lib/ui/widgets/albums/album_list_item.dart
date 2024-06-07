@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_interview_task/providers/album_provider.dart';
+import 'package:flutter_interview_task/ui/widgets/albums/album_form.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/album.dart';
@@ -9,9 +10,11 @@ class AlbumListItem extends StatelessWidget {
   const AlbumListItem({
     super.key,
     required this.album,
+    required this.userId,
   });
 
   final Album album;
+  final int userId;
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +34,16 @@ class AlbumListItem extends StatelessWidget {
             Expanded(child: Text(album.title!)),
             IconButton(
               onPressed: () {
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => Dialog(
-                //     surfaceTintColor: Colors.white,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(16.0),
-                //     ),
-                //     child: UserForm(title: "Update User", user: user),
-                //   ),
-                // );
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    surfaceTintColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0),
+                    ),
+                    child: AlbumForm(title: "Update Album", album: album, userId: userId),
+                  ),
+                );
               },
               icon: const Icon(Icons.edit_rounded),
             ),
@@ -79,10 +82,7 @@ class AlbumListItem extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          albumProvider.deleteAlbum(
-                            userId: album.userId!,
-                            albumId: album.id!,
-                          );
+                          albumProvider.deleteAlbum(album.id!);
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(

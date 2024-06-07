@@ -73,7 +73,7 @@ class UserListItem extends StatelessWidget {
                       children: [
                         const Text("Delete"),
                         Text(
-                          "Are you sure you want to delete this user ?",
+                          "Are you sure you want to delete this user?",
                           style: Theme.of(context).textTheme.bodyLarge,
                         ),
                       ],

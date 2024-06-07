@@ -16,7 +16,6 @@ class _CollectionDeliveryScreenState extends State<CollectionDeliveryScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Collection and Delivery"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

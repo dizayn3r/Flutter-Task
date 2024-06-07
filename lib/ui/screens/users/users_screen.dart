@@ -33,7 +33,6 @@ class _UsersScreenState extends State<UsersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Users"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
           IconButton(
             onPressed: () => showSearch(
@@ -46,7 +45,7 @@ class _UsersScreenState extends State<UsersScreen> {
       ),
       body: Consumer<UserProvider>(
         builder: (context, provider, child) {
-          return provider.loading == false
+          return !provider.loading
               ? ListView.builder(
                   itemCount: provider.users.length,
                   itemBuilder: (context, index) {

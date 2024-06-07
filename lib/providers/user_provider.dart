@@ -55,7 +55,7 @@ class UserProvider with ChangeNotifier {
   /// Update User
   Future<bool> updateUser({required User user}) async {
     http.Response response = await http.patch(
-      Uri.parse("https://jsonplaceholder.typicode.com/users"),
+      Uri.parse("https://jsonplaceholder.typicode.com/users/${user.id}"),
       body: jsonEncode(user.toJson()),
     );
     if (response.statusCode == 200) {
@@ -69,16 +69,9 @@ class UserProvider with ChangeNotifier {
   Future<bool> deleteUser(int userId) async {
     http.Response response = await http.delete(Uri.parse("https://jsonplaceholder.typicode.com/users/$userId"));
     if (response.statusCode == 200) {
-      _removeUser(userId);
       return true;
     } else {
       return false;
     }
-  }
-
-  _removeUser(int userId) {
-    setLoading(true);
-    _users.removeWhere((element) => element.id == userId);
-    setLoading(false);
   }
 }

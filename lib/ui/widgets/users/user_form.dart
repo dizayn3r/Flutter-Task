@@ -4,6 +4,7 @@ import 'package:flutter_interview_task/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../models/user.dart';
+import '../show_snackbar.dart';
 
 class UserForm extends StatefulWidget {
   final String title;
@@ -55,6 +56,25 @@ class _UserFormState extends State<UserForm> {
     catchPhraseController.text = widget.user?.company?.catchPhrase ?? "";
     bsController.text = widget.user?.company?.bs ?? "";
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    usernameController.dispose();
+    emailController.dispose();
+    phoneController.dispose();
+    websiteController.dispose();
+    streetController.dispose();
+    suiteController.dispose();
+    cityController.dispose();
+    zipCodeController.dispose();
+    latController.dispose();
+    longController.dispose();
+    companyNameController.dispose();
+    catchPhraseController.dispose();
+    bsController.dispose();
+    super.dispose();
   }
 
   @override
@@ -314,7 +334,22 @@ class _UserFormState extends State<UserForm> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(),
+                        onPressed: () {
+                          nameController.clear();
+                          usernameController.clear();
+                          emailController.clear();
+                          phoneController.clear();
+                          websiteController.clear();
+                          streetController.clear();
+                          suiteController.clear();
+                          cityController.clear();
+                          zipCodeController.clear();
+                          latController.clear();
+                          longController.clear();
+                          companyNameController.clear();
+                          catchPhraseController.clear();
+                          bsController.clear();
+                        },
                         style: ElevatedButton.styleFrom(
                           surfaceTintColor: Colors.white,
                           foregroundColor: Theme.of(context).colorScheme.primary,
@@ -362,22 +397,22 @@ class _UserFormState extends State<UserForm> {
                             if (widget.user == null) {
                               userProvider.createUser(user: user).then((value) {
                                 if (value) {
-                                  SnackBar snackBar = const SnackBar(
-                                    content: Text("User created successfully!"),
-                                    backgroundColor: Colors.green,
+                                  showSnackBar(
+                                    context: context,
+                                    text: "User created successfully!",
+                                    color: Colors.green,
                                   );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
                                 Navigator.of(context).pop();
                               });
                             } else {
                               userProvider.updateUser(user: user).then((value) {
                                 if (value) {
-                                  SnackBar snackBar = const SnackBar(
-                                    content: Text("User created successfully!"),
-                                    backgroundColor: Colors.green,
+                                  showSnackBar(
+                                    context: context,
+                                    text: "User updated successfully!",
+                                    color: Colors.green,
                                   );
-                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
                                 }
                                 Navigator.of(context).pop();
                               });

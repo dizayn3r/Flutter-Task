@@ -23,11 +23,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Tasks',
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
           useMaterial3: true,
           appBarTheme: const AppBarTheme(centerTitle: true),
           inputDecorationTheme: InputDecorationTheme(
-            focusColor: Colors.teal,
+            focusColor: Colors.cyan,
             alignLabelWithHint: true,
             contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             enabledBorder: OutlineInputBorder(
