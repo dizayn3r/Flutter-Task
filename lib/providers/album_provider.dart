@@ -38,4 +38,24 @@ class AlbumProvider with ChangeNotifier {
     setAlbums(modifiedList);
     setLoading(false);
   }
+
+  /// Delete Album
+  Future<bool> deleteAlbum({required int userId, required int albumId}) async {
+    http.Response response = await http.delete(
+      Uri.parse("https://jsonplaceholder.typicode.com/users/$userId/albums/$albumId"),
+    );
+    if (response.statusCode == 200) {
+      _removeAlbum(userId);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// TODO: This is for testing purpose
+  _removeAlbum(int userId) {
+    setLoading(true);
+    _albums.removeWhere((element) => element.id == userId);
+    setLoading(false);
+  }
 }
