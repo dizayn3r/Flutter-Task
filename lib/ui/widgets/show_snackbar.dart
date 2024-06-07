@@ -5,7 +5,8 @@ showSnackBar({required BuildContext context, required String text, Color? color}
     SnackBar(
       content: Text(text),
       backgroundColor: color ?? Theme.of(context).snackBarTheme.backgroundColor,
-      duration: const Duration(milliseconds: 400),
+      behavior: SnackBarBehavior.floating,
+      duration: const Duration(seconds: 1),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4.0),
       ),
